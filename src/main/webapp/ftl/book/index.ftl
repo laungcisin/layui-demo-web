@@ -14,6 +14,9 @@
     <meta name="format-detection" content="telephone=no">
 
     <link rel="stylesheet" href="${request.contextPath}/statics/lib/layui/css/layui.css">
+    <script>
+        var CONTEXT_PATH = '${request.contextPath}';
+    </script>
 </head>
 
 <body style="padding: 20px 20px">

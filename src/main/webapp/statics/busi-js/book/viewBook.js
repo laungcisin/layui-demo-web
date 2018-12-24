@@ -1,5 +1,3 @@
-var base = document.getElementById("ctx").href;
-
 layui.use(['form', 'layer'], function () {
     var form = layui.form
         , layer = layui.layer;
@@ -15,7 +13,7 @@ function closeAll() {
 
 function initForm() {
     $.ajax({
-        url: base + '/book/getBookById?id=' + $('#id').val(),
+        url: CONTEXT_PATH + '/book/getBookById?id=' + $('#id').val(),
         async: false,
         type: "Get",
         success: function (data) {

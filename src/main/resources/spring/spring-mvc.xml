@@ -38,25 +38,45 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
-    <bean id="mappingJacksonHttpMessageConverter"
-          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-        <property name="supportedMediaTypes">
+    <!--注解映射器 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="interceptors">
             <list>
-                <value>text/html;charset=UTF-8</value>
             </list>
         </property>
     </bean>
 
-    <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    <!--注解适配器 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <!-- 添加json格式转换支持 -->
         <property name="messageConverters">
             <list>
-                <!-- JSON转换器 -->
-                <ref bean="mappingJacksonHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
             </list>
         </property>
     </bean>
+
+
+    <!-- 低版本spring配置 -->
+    <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
+    <!--<bean id="mappingJacksonHttpMessageConverter"-->
+          <!--class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+        <!--<property name="supportedMediaTypes">-->
+            <!--<list>-->
+                <!--<value>text/html;charset=UTF-8</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
+        <!--<property name="messageConverters">-->
+            <!--<list>-->
+                <!--&lt;!&ndash; JSON转换器 &ndash;&gt;-->
+                <!--<ref bean="mappingJacksonHttpMessageConverter"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
 
     <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -101,16 +121,16 @@
     <!-- 配置Freemarker属性文件路径 -->
     <bean id="freemarkerConfiguration"
           class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="location" value="classpath:spring/freemarker.properties" />
+        <property name="location" value="classpath:spring/freemarker.properties"/>
     </bean>
     <!-- 配置freeMarker模板加载地址 -->
     <bean id="freemarkerConfig"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <!-- 视图解析器会在/WEB-INF/ftl/路径下扫描视图文件 -->
-        <property name="templateLoaderPath" value="/ftl/" />
+        <property name="templateLoaderPath" value="/ftl/"/>
         <property name="freemarkerVariables">
             <map>
-                <entry key="xml_escape" value-ref="fmXmlEscape" />
+                <entry key="xml_escape" value-ref="fmXmlEscape"/>
             </map>
         </property>
         <!-- 解决页面中文乱码问题 -->
@@ -120,19 +140,19 @@
             </props>
         </property>
     </bean>
-    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
     <!-- 配置freeMarker视图解析器 -->
     <bean id="freemakerViewResolver"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="viewClass"
-                  value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
-        <property name="requestContextAttribute" value="request" />
+                  value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="requestContextAttribute" value="request"/>
         <property name="prefix" value=""/>
         <property name="suffix" value=".ftl"/>
-        <property name="contentType" value="text/html; charset=UTF-8" />
-        <property name="cache" value="true" />
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+        <property name="cache" value="true"/>
         <!-- 给视图解析器配置优先级 -->
-        <property name="order" value="0" />
+        <property name="order" value="0"/>
     </bean>
     <!-- freemarker end -->
 

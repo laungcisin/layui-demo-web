@@ -1,5 +1,3 @@
-var base = document.getElementById("ctx").href;
-
 layui.use(['table', 'form'], function () {
     var table = layui.table;
     var form = layui.form;
@@ -10,7 +8,7 @@ layui.use(['table', 'form'], function () {
         elem: '#bookListTable',
         height: 'full-200',
         cellMinWidth: 80,
-        url: base + '/book/listBook', //数据接口
+        url: CONTEXT_PATH + '/book/listBook', //数据接口
         page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
             layout: ['prev', 'page', 'next', 'skip', 'limit', 'count'], //自定义分页布局
             curr: 1, //设定初始在第 1 页
@@ -42,7 +40,7 @@ layui.use(['table', 'form'], function () {
         } else if (layEvent === 'del') { //删除
             top.layui.layer.confirm('您确定要删除该记录？', function (index) {
                 $.ajax({
-                    url: base + '/book/deleteBook',
+                    url: CONTEXT_PATH + '/book/deleteBook',
                     async: false,
                     type: "POST",
                     data: {id: data.id, "_method": "delete"},
@@ -86,7 +84,7 @@ layui.use(['table', 'form'], function () {
 function addBookWindow() {
     top.layui.layer.open({
         title: '新增书本',
-        content: base + '/book/addBookPage',
+        content: CONTEXT_PATH + '/book/addBookPage',
         type: 2,
         area: ['550px', '400px'],
         fix: true, //固定
@@ -190,7 +188,7 @@ function addBookWindow() {
 function updateBookWindow(id) {
     top.layui.layer.open({
         title: '更新书本信息',
-        content: base + '/book/updateBookPage?id=' + id,
+        content: CONTEXT_PATH + '/book/updateBookPage?id=' + id,
         type: 2,
         area: ['550px', '400px'],
         fix: true, //固定
@@ -301,7 +299,7 @@ function toolbarDeleteBookWindow() {
 
     top.layui.layer.confirm('您确定要删除该记录？', function (index) {
         $.ajax({
-            url: base + '/book/deleteBook',
+            url: CONTEXT_PATH + '/book/deleteBook',
             async: false,
             type: "POST",
             data: {id: checkStatusV.data[0].id, "_method": "delete"},
@@ -347,7 +345,7 @@ function toolbarUpdateBookWindow() {
 
     top.layui.layer.open({
         title: '更新书本信息',
-        content: base + '/book/updateBookPage?id=' + id,
+        content: CONTEXT_PATH + '/book/updateBookPage?id=' + id,
         type: 2,
         area: ['550px', '400px'],
         fix: true, //固定
@@ -451,7 +449,7 @@ function toolbarUpdateBookWindow() {
 function viewBookWindow(id) {
     top.layui.layer.open({
         title: '查看书本信息',
-        content: base + '/book/viewBookPage?id=' + id,
+        content: CONTEXT_PATH + '/book/viewBookPage?id=' + id,
         type: 2,
         area: ['550px', '400px'],
         fix: true, //固定

@@ -1,5 +1,3 @@
-var base = document.getElementById("ctx").href;
-
 layui.use(['form', 'layer'], function () {
     var form = layui.form
         , layer = layui.layer;
@@ -33,7 +31,7 @@ layui.use(['form', 'layer'], function () {
         // console.log(data.field); //当前容器的全部表单字段，名值对形式：{name: value}
 
         $.ajax({
-            url: base + '/book/updateBook',
+            url: CONTEXT_PATH + '/book/updateBook',
             async: false,
             type: "POST",
             data: data.field,
@@ -83,7 +81,7 @@ function closeAll() {
 
 function initForm() {
     $.ajax({
-        url: base + '/book/getBookById?id=' + $('#id').val(),
+        url: CONTEXT_PATH + '/book/getBookById?id=' + $('#id').val(),
         async: false,
         type: "Get",
         success: function (data) {

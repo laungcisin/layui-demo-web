@@ -1,5 +1,3 @@
-var base = document.getElementById("ctx").href;
-
 layui.use(['form', 'layer'], function () {
     var form = layui.form
         , layer = layui.layer;
@@ -22,7 +20,7 @@ layui.use(['form', 'layer'], function () {
     //监听提交
     form.on('submit(add)', function (data) {
         $.ajax({
-            url: base + '/book/addBook',
+            url: CONTEXT_PATH + '/book/addBook',
             async: false,
             type: "POST",
             data: data.field,
