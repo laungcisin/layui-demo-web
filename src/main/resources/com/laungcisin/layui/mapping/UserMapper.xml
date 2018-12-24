@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laungcisin.layui.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.laungcisin.layui.domain.User">
+        <id column="user_id" property="userId" jdbcType="CHAR"/>
+        <result column="user_name" property="username" jdbcType="VARCHAR"/>
+        <result column="user_birthday" property="userBirthday" jdbcType="DATE"/>
+        <result column="user_salary" property="userSalary" jdbcType="DOUBLE"/>
+        <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR"/>
+        <result column="e_mail" property="eMail" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        user_id, user_name, user_birthday, user_salary, mobile_phone, e_mail
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where user_id = #{userId,jdbcType=CHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from t_user
+        where user_id = #{userId,jdbcType=CHAR}
+    </delete>
+    <insert id="insert" parameterType="com.laungcisin.layui.domain.User">
+        insert into t_user (user_id, user_name, user_birthday,
+        user_salary, mobile_phone, e_mail
+        )
+        values (#{userId,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, #{userBirthday,jdbcType=DATE},
+        #{userSalary,jdbcType=DOUBLE}, #{mobilePhone,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.laungcisin.layui.domain.User">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="username != null">
+                user_name,
+            </if>
+            <if test="userBirthday != null">
+                user_birthday,
+            </if>
+            <if test="userSalary != null">
+                user_salary,
+            </if>
+            <if test="mobilePhone != null">
+                mobile_phone,
+            </if>
+            <if test="eMail != null">
+                e_mail,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=CHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="userBirthday != null">
+                #{userBirthday,jdbcType=DATE},
+            </if>
+            <if test="userSalary != null">
+                #{userSalary,jdbcType=DOUBLE},
+            </if>
+            <if test="mobilePhone != null">
+                #{mobilePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="eMail != null">
+                #{eMail,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.laungcisin.layui.domain.User">
+        update t_user
+        <set>
+            <if test="username != null">
+                user_name = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="userBirthday != null">
+                user_birthday = #{userBirthday,jdbcType=DATE},
+            </if>
+            <if test="userSalary != null">
+                user_salary = #{userSalary,jdbcType=DOUBLE},
+            </if>
+            <if test="mobilePhone != null">
+                mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="eMail != null">
+                e_mail = #{eMail,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=CHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.laungcisin.layui.domain.User">
+        update t_user
+        set user_name = #{username,jdbcType=VARCHAR},
+        user_birthday = #{userBirthday,jdbcType=DATE},
+        user_salary = #{userSalary,jdbcType=DOUBLE},
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+        e_mail = #{eMail,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=CHAR}
+    </update>
+
+    <!-- ==============以下内容是根据自身业务扩展的内容======================= -->
+    <!-- select标签的id属性与UserMapper接口中定义的getAllUser方法要一模一样 -->
+    <select id="getAllUser" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+    </select>
+
+    <select id="getAllUserCount" resultType="java.lang.Integer">
+        select count(1) from t_user
+    </select>
+
+    <select id="getUserList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user where 1 = 1 limit #{start}, #{end}
+    </select>
+
+    <select id="checkUsername" resultType="java.lang.Integer">
+        select
+        count(1)
+        from t_user where user_name = #{username}
+    </select>
+</mapper>
