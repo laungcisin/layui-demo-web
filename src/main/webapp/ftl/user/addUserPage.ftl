@@ -8,10 +8,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8"/>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="/statics/css/font.css">
-    <link rel="stylesheet" href="/statics/css/xadmin.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/font.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/xadmin.css">
 
-    <link rel="stylesheet" href="/statics/lib/layui/css/layui.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/lib/layui/css/layui.css">
 
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
@@ -95,10 +95,10 @@
     </form>
 </div>
 
-<script src="/statics/lib/jquery/3.2.1/jquery.min.js"></script>
-<script src="/statics/lib/layui/layui.js"></script>
+<script src="${request.contextPath}/statics/lib/jquery/3.2.1/jquery.min.js"></script>
+<script src="${request.contextPath}/statics/lib/layui/layui.js"></script>
 <!--<script src="/statics/js/utils.js"></script>-->
-<script src="/statics/busi-js/user/addUser.js"></script>
+<script src="${request.contextPath}/statics/busi-js/user/addUser.js"></script>
 </body>
 
 </html>
